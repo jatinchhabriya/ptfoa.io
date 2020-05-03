@@ -1,17 +1,16 @@
-<html>
-<body>
-
-<h1>Vote on your restriction</h1>
-
-<form action="/action_page.php">
-  <input type="checkbox" id="Option 1" name="vehicle1" value="Allow Newspaper">
-  <label for="vehicle1"> I want to allow newspaper</label><br>
-  <input type="checkbox" id="Option 2" name="vehicle2" value="Allow Maid">
-  <label for="vehicle2"> I want to allow maid</label><br>
-  <input type="checkbox" id="Option 3" name="vehicle3" value="Allow Both">
-  <label for="vehicle3"> Hold on till May 17th </label><br><br>
-  <input type="submit" value="Submit">
+<form name="submit-to-google-sheet">
+  <input name="email" type="email" placeholder="Email" required>
+  <button type="submit">Send</button>
 </form>
 
-</body>
-</html>
+<script>
+  const scriptURL = '<SCRIPT URL>'
+  const form = document.forms['submit-to-google-sheet']
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
